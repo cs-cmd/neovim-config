@@ -501,9 +501,10 @@ require('lazy').setup({
         {
             'thedenisnikulin/vim-cyberpunk',
             priority = 1000,
-            init = function()
+            config = function()
                 vim.cmd.colorscheme 'cyberpunk'
                 vim.cmd.set 'termguicolors'
+                vim.cmd.hi 'Special gui=none'
                 vim.cmd.hi 'CursorLine guibg=#1c171f guifg=none'
             end,
         },
