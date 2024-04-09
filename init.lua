@@ -1,4 +1,3 @@
--- Most of this was taken from 'nvim-lua/kickstart.nvim'
 -- "¯\_(ツ)_/¯"
 -- Set space as `leader` key
 -- Must come before plugins are used
@@ -128,23 +127,23 @@ require('lazy').setup({
         },
 
         -- shows pending keybinds
-        -- {
-        --     'folke/which-key.nvim',
-        --     event = 'VimEnter', -- load when program is entered
-        --     config = function() -- config runs after load
-        --         local which = require('which-key')
-        --         which.setup()
-        --
-        --         -- document existing registers
-        --         which.register {
-        --             ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        --             ['<leader>d'] = { name = '[D]iagnostic', _ = 'which_key_ignore' },
-        --             ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        --             ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        --             ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        --         }
-        --     end,
-        -- },
+        {
+            'folke/which-key.nvim',
+            event = 'VimEnter', -- load when program is entered
+            config = function() -- config runs after load
+                local which = require('which-key')
+                which.setup()
+
+                -- document existing registers
+                which.register {
+                    ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+                    ['<leader>d'] = { name = '[D]iagnostic', _ = 'which_key_ignore' },
+                    ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+                    ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+                    ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+                }
+            end,
+        },
 
         -- fuzzy finder (searches EVERYTHING)
         -- important keybinds:
@@ -484,7 +483,7 @@ require('lazy').setup({
                 require('nvim-tree').setup {} -- setup
                 local api = require('nvim-tree.api')
                 local function opts(desc)
-                    return { desc = 'nvim-tree: ' .. desc, buffer = burnr, noremap = true, silent = true, nowait = true }
+                    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
                 end -- opts
 
                 -- api.config.mappings.default_on_attach(bufnr)
@@ -505,6 +504,7 @@ require('lazy').setup({
             init = function()
                 vim.cmd.colorscheme 'cyberpunk'
                 vim.cmd.set 'termguicolors'
+                vim.cmd.hi 'CursorLine guibg=#1c171f guifg=none'
             end,
         },
 
