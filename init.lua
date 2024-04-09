@@ -505,6 +505,9 @@ require('lazy').setup({
                 vim.cmd.colorscheme 'cyberpunk'
                 vim.cmd.set 'termguicolors'
                 vim.cmd.hi 'Special gui=none'
+                -- Using this line requires changing the color of the
+                -- terminal cursor to 00ffc8 to get the same color
+                -- as the CursorNumber color
                 vim.cmd.hi 'CursorLine guibg=#1c171f guifg=none'
             end,
         },
