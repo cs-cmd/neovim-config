@@ -55,6 +55,9 @@ vim.opt.cursorline = true
 -- minimum number of screen lines to keep above/below cursor
 vim.opt.scrolloff = 10
 
+-- add small hack for vertical ruler
+vim.opt.colorcolumn = '80'
+
 -- [[ BASIC KEYMAPS ]]
 -- highlight search, then clear (normal mode)
 vim.opt.hlsearch = true
