@@ -305,6 +305,11 @@ require('lazy').setup({
                             },
                         },
                     },
+                    html = {},
+                    jsonls = {},
+                    ols = {},
+                    sqlls = {},
+                    volar = {},
                 } -- servers
 
                 require('mason').setup()
