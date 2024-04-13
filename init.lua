@@ -60,6 +60,7 @@ vim.opt.colorcolumn = "80"
 
 -- add tabstop
 vim.cmd.set("tabstop=4")
+vim.cmd.set("shiftwidth=4")
 
 -- [[ BASIC KEYMAPS ]]
 -- highlight search, then clear (normal mode)
@@ -121,7 +122,7 @@ require("lazy").setup({
 	-- quickly comment
 	-- important keybinds (normal mode):
 	-- gcc - line comment
-	-- -- gbc - block comment
+	-- gbc - block comment
 	{ "numToStr/Comment.nvim", opts = {}, lazy = false },
 
 	-- gitsigns provide signs to gutter for managing changes
@@ -179,18 +180,6 @@ require("lazy").setup({
 			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 		},
 		config = function()
-			-- load keybinds here
-			extensions =
-				{
-					["ui-select"] = {
-						require("telescope.themes").get_dropdown(),
-					},
-				},
-				-- enable extensions if installed
-				pcall(require("telescope").load_extension, "fzf")
-			pcall(require("telescope").load_extension, "ui-select")
-
-			-- fzf keybinds
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
@@ -528,6 +517,12 @@ require("lazy").setup({
 		config = function()
 			require("lualine").setup({})
 		end, -- lualine config
+	},
+
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^4",
+		ft = { "rust " },
 	},
 
 	-- [[ COLORSCHEMES ]]
