@@ -89,6 +89,7 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to above window"
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to below window" })
 
 -- [[ BASIC AUTOCOMMANDS ]]
+-- Highlight yanked/copied text
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking/copying text",
 	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
@@ -96,6 +97,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+-- Remove auto-comment when adding a newline at the end of a commented line
+vim.api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
 
 -- [[ Use lazy.nvim plugin manager ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
