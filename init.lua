@@ -58,10 +58,6 @@ vim.opt.scrolloff = 10
 -- add small hack for vertical ruler
 vim.opt.colorcolumn = "80"
 
--- add tabstop
-vim.cmd.set("tabstop=4")
-vim.cmd.set("shiftwidth=4")
-
 -- [[ BASIC KEYMAPS ]]
 -- highlight search, then clear (normal mode)
 vim.opt.hlsearch = true
@@ -88,6 +84,16 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to right window"
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to above window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to below window" })
 
+-- toggle indentation type, tabs or spaces
+vim.keymap.set(
+	"n",
+	"<leader>ti",
+	function()
+		vim.cmd.set("expandtab!")
+	end, -- function
+	{ desc = "[T]oggle [I]ndentation type (tabs/spaces)" }
+)
+
 -- [[ BASIC AUTOCOMMANDS ]]
 -- Highlight yanked/copied text
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -96,6 +102,41 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank()
 	end,
+})
+
+-- Set tabstop, shiftwidth, etc depending on file type
+-- extensions that require a change
+local changeExt = {
+	["sh"] = 1,
+	["shl"] = 1,
+	["js"] = 2,
+	["ts"] = 2,
+	["jsx"] = 2,
+	["tsx"] = 2,
+}
+-- commands to run if the file name exists in above tables
+local language_table = {
+	-- use 4-char tabs
+	[1] = { "noexpandtab", "tabstop=4", "shiftwidth=0" },
+	-- use 2-char spaces
+	[2] = { "expandtab", "tabstop=2", "shiftwidth=2" },
+	-- all others, 4-space expanded tabs, default values
+	["default"] = { "expandtab", "shiftwidth=4", "tabstop=4" },
+}
+-- Determine tabs/spaces and length depending on file name
+vim.api.nvim_create_autocmd("BufEnter", {
+	desc = "Change tabstop/shiftwidth settings depending on filetype",
+	group = vim.api.nvim_create_augroup("detect-tabstop", {}),
+	callback = function()
+		local ext = vim.fn.expand("%:e") -- get file extension (minus `.`)
+
+		local table_index = changeExt[ext] or "default"
+
+		-- run commands
+		for _, command in ipairs(language_table[table_index]) do
+			vim.cmd.set(command)
+		end
+	end, -- callback
 })
 
 -- Remove auto-comment when adding a newline at the end of a commented line
