@@ -1,4 +1,6 @@
 -- "¯\_(ツ)_/¯"
+-- Most of this was taken from TJ DeVries' kickstart.nvim found at:
+--      << github.com/nvim-lua/kickstart.nvim >>
 -- Set space as `leader` key
 -- Must come before plugins are used
 vim.g.mapleader = " "
@@ -199,6 +201,8 @@ require("lazy").setup({
 				["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
 				["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
 				["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
+				["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
+				["<leader>b"] = { name = "[B]reakpoint", _ = "which_key_ignore" },
 			})
 		end,
 	},
@@ -546,16 +550,17 @@ require("lazy").setup({
 		config = function()
 			require("nvim-tree").setup({}) -- setup
 			local api = require("nvim-tree.api")
-			local function opts(desc)
-				return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-			end -- opts
 
-			-- api.config.mappings.default_on_attach(bufnr)
-
-			vim.keymap.set("n", "<leader>tt", api.tree.toggle, opts("Toggle tree"))
+			vim.keymap.set(
+				"n",
+				"<leader>tt",
+				api.tree.toggle,
+				{ desc = "[T]oggle Neovim [T]ree", noremap = true, silent = true, nowait = true }
+			)
 		end, -- config
 	},
 
+	-- Fancy status line
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -564,11 +569,60 @@ require("lazy").setup({
 		end, -- lualine config
 	},
 
+	-- Rust tree-sitter parser
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^4",
 		ft = { "rust " },
 	},
+
+	-- Adapters to find:
+	-- C++,
+	-- C,
+	-- Rust,
+	-- JS/TS [React],
+	-- Lua,
+
+	-- Used for more complex debugging than `print` statements
+	{
+		"mfussenegger/nvim-dap",
+		dependencies = {
+			"rcarria/nvim-dap-ui",
+			"nvim-neotest/nvim-nio",
+			"leoluz/nvim-dap-go",
+		},
+		config = function()
+			local dap = require("dap")
+			local dapui = require("dapui")
+
+			require("dap-go").setup()
+			dapui.setup()
+
+			-- in-debugger keybinds
+			vim.keymap.set("n", "<F5>", dap.continue, { desc = "Continue" })
+			vim.keymap.set("n", "<F10>", dap.step_over, { desc = "Step Over" })
+			vim.keymap.set("n", "<F11>", dap.step_into, { desc = "Step Into" })
+			vim.keymap.set("n", "<F12>", dap.step_out, { desc = "Step Out" })
+
+			-- out of debugger keybindings
+			vim.keymap.set("n", "<leader>bt", dap.toggle_breakpoint, { desc = "[B]reakpoint [T]oggle" })
+			vim.keymap.set("n", "<leader>bs", dap.set_breakpoint, { desc = "[B]reakpoint [S]et" })
+
+			-- dap-ui keybinds
+			dap.listeners.before.attach.dapui_config = dapui.open
+			dap.listeners.before.launch.dapui_config = dapui.open
+			dap.listeners.before.event_terminated.dapui_config = dapui.close
+			dap.listeners.before.event_exited.dapui_config = dapui.close
+		end, -- config
+	},
+
+	-- database integration plugin
+	-- {
+	--     'tpope/vim-dadbod',
+	--     config = function()
+	--
+	--     end, -- config
+	-- },
 
 	-- [[ COLORSCHEMES ]]
 	{
