@@ -66,10 +66,10 @@ vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- diagnostics, bound to diagnostic menu option
-vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
-vim.keymap.set("n", "<leader>dm", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
-vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+vim.keymap.set("n", "<leader>ep", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
+vim.keymap.set("n", "<leader>em", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
+vim.keymap.set("n", "<leader>ee", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+vim.keymap.set("n", "<leader>eq", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- exit terminal
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
@@ -156,7 +156,6 @@ vim.opt.rtp:prepend(lazypath)
 -- useful commands:
 -- :Lazy - current plugin status
 -- :Lazy update - update plugins
-
 require("lazy").setup({
 	-- web devicons for several plugins
 	{
@@ -197,12 +196,13 @@ require("lazy").setup({
 			-- document existing registers
 			which.register({
 				["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-				["<leader>d"] = { name = "[D]iagnostic", _ = "which_key_ignore" },
+				["<leader>e"] = { name = "[E]rrors", _ = "which_key_ignore" },
 				["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
 				["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
 				["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
 				["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
 				["<leader>b"] = { name = "[B]reakpoint", _ = "which_key_ignore" },
+				["<leader>f"] = { name = "[F]ile", _ = "which_key_ignore" },
 			})
 		end,
 	},
@@ -301,10 +301,11 @@ require("lazy").setup({
 					-- Jump to definition of type
 					map("<leader>D", builtin.lsp_type_definitions, "Type [D]efinition")
 					-- Fzf all symbols in current document
-					map("<leader>ds", builtin.lsp_document_symbols, "[D]ocument [S]ymbols")
+					map("<leader>fs", builtin.lsp_document_symbols, "[F]ile [S]ymbols")
 
 					-- Fzf sumbols in current workspace
 					map("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+
 					-- rename variable underneath cursor
 					map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 
