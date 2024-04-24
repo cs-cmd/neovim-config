@@ -66,10 +66,10 @@ vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- diagnostics, bound to diagnostic menu option
-vim.keymap.set("n", "<leader>ep", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
-vim.keymap.set("n", "<leader>em", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
-vim.keymap.set("n", "<leader>ee", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-vim.keymap.set("n", "<leader>eq", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+vim.keymap.set("n", "<leader>ep", vim.diagnostic.goto_prev, { desc = "[E]rrors: [P]revious error message" })
+vim.keymap.set("n", "<leader>en", vim.diagnostic.goto_next, { desc = "[E]rrors: [N]ext error message" })
+vim.keymap.set("n", "<leader>ef", vim.diagnostic.open_float, { desc = "[E]rrors: [F]loating menu" })
+vim.keymap.set("n", "<leader>eq", vim.diagnostic.setloclist, { desc = "[E]rrors: [Q]uickfix menu" })
 
 -- exit terminal
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
