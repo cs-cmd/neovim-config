@@ -455,7 +455,7 @@ require("lazy").setup({
 					-- [N]ext item
 					["<C-n>"] = cmp.mapping.select_next_item(),
 					-- [P]revious item
-					["<C-p"] = cmp.mapping.select_prev_item(),
+					["<C-p>"] = cmp.mapping.select_prev_item(),
 					-- Scroll documentation [B]ack/[F]orward
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
