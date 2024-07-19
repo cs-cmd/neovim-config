@@ -451,7 +451,9 @@ require("lazy").setup({
 				completion = { completeopt = "menu,menuone,noinsert" },
 
 				-- `:help ins-completion`
-				mapping = cmp.mapping.preset.insert({
+				-- changed from `cmp.mapping.preset.insert` to `cmp.mapping` to
+				-- avoid `cmp` using my arrow keys :(
+				mapping = cmp.mapping({
 					-- [N]ext item
 					["<C-n>"] = cmp.mapping.select_next_item(),
 					-- [P]revious item
@@ -459,6 +461,8 @@ require("lazy").setup({
 					-- Scroll documentation [B]ack/[F]orward
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
+					-- [E]xit autocomplete
+					["<C-e>"] = cmp.mapping.abort(),
 
 					-- Confirm completion
 					["<C-Space>"] = cmp.mapping.confirm({ select = true }),
