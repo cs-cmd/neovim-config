@@ -571,13 +571,6 @@ require("lazy").setup({
 		end, -- lualine config
 	},
 
-	-- Rust tree-sitter parser
-	{
-		"mrcjkb/rustaceanvim",
-		version = "^4",
-		ft = { "rust " },
-	},
-
 	-- Adapters to find:
 	-- C++,
 	-- C,
