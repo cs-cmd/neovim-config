@@ -620,10 +620,10 @@ require("lazy").setup({
 	-- },
 
 	-- [[ COLORSCHEMES ]]
-	{
-		"folke/tokyonight.nvim",
-		priority = 1000, -- load before other plugins
-	},
+	-- {
+	-- 	"folke/tokyonight.nvim",
+	-- 	priority = 1000, -- load before other plugins
+	-- },
 
 	{
 		"thedenisnikulin/vim-cyberpunk",
@@ -640,10 +640,27 @@ require("lazy").setup({
 		end,
 	},
 
-	{
-		"Zabanaa/neuromancer.vim",
-		priority = 1000,
-	},
+	-- {
+	-- 	"Zabanaa/neuromancer.vim",
+	-- 	priority = 1000,
+	-- },
+	-- {
+	-- 	"maxmx03/fluoromachine.nvim",
+	-- 	priority = 1001,
+	-- 	lazy = true,
+	-- 	config = function()
+	-- 		local fm = require("fluoromachine")
+	--
+	-- 		fm.setup({
+	-- 			glow = true,
+	-- 			-- themes: fluoromachine, retrowave, delta
+	-- 			theme = 'fluoromachine',
+	-- 			transparent = true,
+	-- 		})
+	--
+	-- 		vim.cmd.colorscheme("fluoromachine")
+	-- 	end,
+	-- },
 }, {
 	ui = {
 		icons = vim.g.have_nerd_font and {} or {
