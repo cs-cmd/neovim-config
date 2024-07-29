@@ -86,6 +86,12 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to right window"
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to above window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to below window" })
 
+-- Set cursor style and termguicolors on for all colorschemes
+vim.cmd.set(
+	"guicursor=n-v-c-sm:hor50-Cursor,i-ci-ve:ver25-Cursor-blinkwait300-blinkon300-blinkoff300,r-cr-o:hor25-Cursor"
+)
+vim.cmd.set("termguicolors")
+
 -- toggle indentation type, tabs or spaces
 vim.keymap.set(
 	"n",
@@ -630,31 +636,31 @@ require("lazy").setup({
 		priority = 1000,
 		config = function()
 			vim.cmd.colorscheme("cyberpunk")
-			vim.cmd.set("termguicolors")
 			vim.cmd.hi("Special gui=none")
 			vim.cmd.hi("CursorLine guibg=#1c171f guifg=none")
 			vim.cmd.hi("Cursor gui=none guifg=#2b3e5a guibg=#00ffc8")
-			vim.cmd.set(
-				"guicursor=n-v-c-sm:hor50-Cursor,i-ci-ve:ver25-Cursor-blinkwait300-blinkon300-blinkoff300,r-cr-o:hor25-Cursor"
-			)
 		end,
 	},
 
 	-- {
 	-- 	"Zabanaa/neuromancer.vim",
 	-- 	priority = 1000,
+	-- 	lazy = false,
+	-- 	config = function()
+	-- 		vim.cmd.colorscheme("neuromancer")
+	-- 	end,
 	-- },
 	-- {
 	-- 	"maxmx03/fluoromachine.nvim",
-	-- 	priority = 1001,
-	-- 	lazy = true,
+	-- 	priority = 1000,
+	-- 	lazy = false,
 	-- 	config = function()
 	-- 		local fm = require("fluoromachine")
 	--
 	-- 		fm.setup({
 	-- 			glow = true,
 	-- 			-- themes: fluoromachine, retrowave, delta
-	-- 			theme = 'fluoromachine',
+	-- 			theme = "fluoromachine",
 	-- 			transparent = true,
 	-- 		})
 	--
