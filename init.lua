@@ -639,6 +639,7 @@ require("lazy").setup({
 			vim.cmd.hi("Special gui=none")
 			vim.cmd.hi("CursorLine guibg=#1c171f guifg=none")
 			vim.cmd.hi("Cursor gui=none guifg=#2b3e5a guibg=#00ffc8")
+			vim.cmd.hi("IncSearch cterm=reverse guibg=#13b894")
 		end,
 	},
 
