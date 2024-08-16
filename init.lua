@@ -198,17 +198,24 @@ require("lazy").setup({
 		config = function() -- config runs after load
 			local which = require("which-key")
 			which.setup()
-
-			-- document existing registers
-			which.register({
-				["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-				["<leader>e"] = { name = "[E]rrors", _ = "which_key_ignore" },
-				["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
-				["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
-				["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
-				["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
-				["<leader>b"] = { name = "[B]reakpoint", _ = "which_key_ignore" },
-				["<leader>f"] = { name = "[F]ile", _ = "which_key_ignore" },
+			-- Add keybinds
+			which.add({
+				{ "<leader>b", group = "[B]reakpoint" },
+				{ "<leader>b_", hidden = true },
+				{ "<leader>c", group = "[C]ode" },
+				{ "<leader>c_", hidden = true },
+				{ "<leader>e", group = "[E]rrors" },
+				{ "<leader>e_", hidden = true },
+				{ "<leader>r", group = "[R]ename" },
+				{ "<leader>r_", hidden = true },
+				{ "<leader>s", group = "[S]earch" },
+				{ "<leader>s_", hidden = true },
+				{ "<leader>w", group = "[W]orkspace" },
+				{ "<leader>w_", hidden = true },
+				{ "<leader>t", group = "[T]oggle" },
+				{ "<leader>t_", hidden = true },
+				{ "<leader>f", group = "[F]ile" },
+				{ "<leader>f_", hidden = true },
 			})
 		end,
 	},
@@ -618,12 +625,10 @@ require("lazy").setup({
 	},
 
 	-- database integration plugin
-	-- {
-	--     'tpope/vim-dadbod',
-	--     config = function()
-	--
-	--     end, -- config
-	-- },
+	{
+		"tpope/vim-dadbod",
+		config = function() end, -- config
+	},
 
 	-- [[ COLORSCHEMES ]]
 	-- {
