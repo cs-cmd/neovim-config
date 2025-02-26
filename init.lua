@@ -60,6 +60,9 @@ vim.opt.scrolloff = 10
 -- add small hack for vertical ruler
 vim.opt.colorcolumn = "80"
 
+-- 'termguicolors' enables all the neat terminal GUI colorschemes I love so much
+vim.cmd.set("termguicolors")
+
 -- [[ BASIC KEYMAPS ]]
 -- highlight search, then clear (normal mode)
 vim.opt.hlsearch = true
@@ -274,6 +277,7 @@ require("lazy").setup({
 
     {
         "neovim/nvim-lspconfig",
+        lazy = true,
         dependencies = {
             -- install LSP and related tools to stdpath
             "williamboman/mason.nvim",
@@ -386,46 +390,17 @@ require("lazy").setup({
                     end,
                 },
             })
+
+            -- Add code to disable on startup, but also add an easy-to-remember
+            -- command to enable/disable autocompletion
         end, -- config
     }, -- LSP
-
-    -- autoformatting
-    -- Removed autoformatting; I format my code well enough on my own, I like
-    -- to think :) - RO 10/28/24
-    -- {
-    -- 	"stevearc/conform.nvim",
-    -- 	lazy = false, -- always load
-    -- 	keys = {
-    -- 		{
-    -- 			"<leader>f",
-    -- 			function()
-    -- 				require("conform").format({ async = true, lsp_fallback = true })
-    -- 			end,
-    -- 			mode = "",
-    -- 			desc = "[F]ormat buffer",
-    -- 		},
-    -- 	},
-    -- 	opts = {
-    -- 		notify_on_error = false,
-    -- 		format_on_save = function(bufnr)
-    -- 			-- disable formatting for languages without common formatting styles
-    -- 			local disable_filetypes = { c = true, cpp = true }
-    -- 			return {
-    -- 				timeout_ms = 500,
-    -- 				lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-    -- 			}
-    -- 		end, -- format_on_save
-    -- 		formatters_by_ft = {
-    -- 			lua = { "stylua" },
-    -- 			-- different formatters go here
-    -- 		},
-    -- 	},
-    -- },
 
     -- Autocompletion
     {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
+        lazy = true,
         dependencies = {
             -- snippet engine and associated source
             {
@@ -508,8 +483,12 @@ require("lazy").setup({
                     { name = "path" },
                 },
             })
+
+            -- Add code to disable on startup, but also add an easy-to-remember
+            -- command to enable/disable autocompletion
         end, -- config
     },
+
     {
         "folke/todo-comments.nvim",
         event = "VimEnter",
@@ -639,14 +618,14 @@ require("lazy").setup({
 
     {
         "thedenisnikulin/vim-cyberpunk",
-        priority = 1000,
-        lazy = true,
+        priority = 1001,
+        lazy = false,
         config = function()
-            -- vim.cmd.colorscheme("cyberpunk")
-            -- vim.cmd.hi("Special gui=none")
-            -- vim.cmd.hi("CursorLine guibg=#1c171f guifg=none")
-            -- vim.cmd.hi("Cursor gui=none guifg=#2b3e5a guibg=#00ffc8")
-            -- vim.cmd.hi("IncSearch cterm=reverse guibg=#13b894")
+            vim.cmd.colorscheme("cyberpunk")
+            vim.cmd.hi("Special gui=none")
+            vim.cmd.hi("CursorLine guibg=#1c171f guifg=none")
+            vim.cmd.hi("Cursor gui=none guifg=#2b3e5a guibg=#00ffc8")
+            vim.cmd.hi("IncSearch cterm=reverse guibg=#13b894")
         end,
     },
 
@@ -674,8 +653,9 @@ require("lazy").setup({
     {
         "cs-cmd/cyberpunk-v2",
         priority = 1000,
+        lazy = true,
         config = function()
-            vim.cmd.colorscheme("cyberpunk-v2")
+            -- vim.cmd.colorscheme("cyberpunk-v2")
         end,
     },
 },
